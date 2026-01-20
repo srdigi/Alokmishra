@@ -23,7 +23,6 @@ s.parentNode.insertBefore(t,s)
 fbq('init','YOUR_PIXEL_ID');
 fbq('track','PageView');
 </script>
-<!-- END META PIXEL -->
 
 <style>
 *{
@@ -33,7 +32,7 @@ fbq('track','PageView');
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* SOFT ANIMATED INDIAN TEAM BACKGROUND */
+/* FIRE / LOGO MATCHING BACKGROUND */
 body{
     min-height:100vh;
     display:flex;
@@ -41,61 +40,62 @@ body{
     align-items:center;
     background: linear-gradient(
         120deg,
-        #0a2a66,
-        #0f4db8,
-        #1c7cff,
-        #0a2a66
+        #ffb347,
+        #ff7a18,
+        #ff5f00,
+        #ff7a18
     );
     background-size:400% 400%;
-    animation:bgMove 12s ease infinite;
+    animation:fireMove 10s ease infinite;
 }
 
-@keyframes bgMove{
+@keyframes fireMove{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
 
+/* MAIN CARD */
 .container{
     width:92%;
     max-width:420px;
-    background:rgba(0,0,0,0.55);
-    backdrop-filter: blur(6px);
-    color:#fff;
-    border-radius:22px;
+    background:rgba(255,255,255,0.94);
+    color:#000;
+    border-radius:24px;
     padding:22px;
-    box-shadow:0 18px 45px rgba(0,0,0,0.45);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
     text-align:center;
 }
 
 /* LOGO */
 .logo{
-    width:110px;
-    height:110px;
+    width:120px;
+    height:120px;
     border-radius:50%;
-    border:3px solid #1c7cff;
-    object-fit:cover;
     margin-bottom:12px;
+    object-fit:cover;
+    box-shadow:0 12px 30px rgba(0,0,0,0.35);
 }
 
 /* HEADER */
 h1{
     font-size:22px;
-    color:#7fb7ff;
-    margin-bottom:4px;
+    font-weight:800;
+    color:#000;
 }
 
 .tagline{
     font-size:14px;
-    color:#e0e0e0;
+    font-weight:600;
+    color:#333;
     margin-bottom:12px;
 }
 
 /* COUNTER */
 .counter{
     font-size:15px;
-    font-weight:bold;
-    color:#ffd36e;
+    font-weight:800;
+    color:#ff5f00;
     margin-bottom:14px;
 }
 
@@ -108,14 +108,16 @@ h1{
 .features p{
     font-size:14px;
     margin-bottom:9px;
+    line-height:1.4;
+    color:#000;
 }
 
 .features span{
-    color:#7fb7ff;
-    font-weight:bold;
+    font-weight:800;
+    color:#ff5f00;
 }
 
-/* ANIMATED BUTTON */
+/* CTA BUTTON */
 .join-btn{
     position:relative;
     width:100%;
@@ -123,25 +125,19 @@ h1{
     border:none;
     border-radius:35px;
     font-size:16px;
-    font-weight:bold;
+    font-weight:900;
     color:#000;
     cursor:pointer;
     overflow:hidden;
-    background: linear-gradient(270deg,#1c7cff,#7fb7ff,#1c7cff);
+    background: linear-gradient(270deg,#ffb347,#ff7a18,#ffb347);
     background-size:600% 600%;
-    animation:colorFlow 4s ease infinite, glow 2s ease-in-out infinite;
+    animation:btnFlow 4s ease infinite;
 }
 
-@keyframes colorFlow{
+@keyframes btnFlow{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
-}
-
-@keyframes glow{
-    0%{box-shadow:0 0 10px rgba(127,183,255,0.4)}
-    50%{box-shadow:0 0 20px rgba(127,183,255,0.8)}
-    100%{box-shadow:0 0 10px rgba(127,183,255,0.4)}
 }
 
 /* BALL ANIMATION */
@@ -163,14 +159,15 @@ h1{
     display:none;
     margin-top:12px;
     font-size:13px;
-    color:#9affc7;
+    font-weight:700;
+    color:green;
 }
 
 /* FOOTER */
 .footer{
     margin-top:16px;
     font-size:11px;
-    color:#d0d0d0;
+    color:#222;
     line-height:1.4;
 }
 </style>
@@ -180,37 +177,31 @@ h1{
 
 <div class="container">
 
-    <!-- LOGO -->
     <img src="logo.png" class="logo" alt="Alok Mishra Logo">
 
-    <!-- TITLE -->
     <h1>ALOK MISHRA</h1>
     <div class="tagline">Cricket Mastermind 🏏</div>
 
-    <!-- COUNTER -->
     <div class="counter">
         🔥 Subscribers: <span id="count">0</span>+
     </div>
 
-    <!-- FEATURES -->
     <div class="features">
-        <p>📊 <span>Match Analysis</span> – pitch, form & stats</p>
+        <p>📊 <span>Match Analysis</span> – stats & conditions</p>
         <p>🔥 <span>Toss & Match Insights</span></p>
         <p>⚡ <span>Live Match Updates</span></p>
         <p>🧠 <span>Cricket Knowledge Sharing</span></p>
         <p>⚠️ Informational & entertainment purpose only</p>
     </div>
 
-    <!-- BUTTON -->
     <button class="join-btn" onclick="joinNow()">
-        🚀 JOIN TELEGRAM CHANNEL
+        JOIN TELEGRAM CHANNEL
     </button>
 
     <div class="status" id="statusText">
         ✅ Opening Telegram…
     </div>
 
-    <!-- DISCLAIMER -->
     <div class="footer">
         No guarantee • No fixed • No betting<br>
         This page is for cricket information & entertainment only
@@ -220,30 +211,28 @@ h1{
 
 <script>
 /* COUNTER ANIMATION */
-let target = 30000;   // yahan subscriber number change kar sakte ho
+let target = 30000;
 let count = 0;
 
 let counter = setInterval(()=>{
-    count += 123;
+    count += 125;
     if(count >= target){
         count = target;
         clearInterval(counter);
     }
     document.getElementById("count").innerText = count.toLocaleString();
-}, 30);
+},30);
 
-/* JOIN + REAL INTENT TRACKING */
-let joinIntent = false;
-
+/* JOIN + META SAFE INTENT */
+let joinIntent=false;
 function joinNow(){
-    joinIntent = true;
+    joinIntent=true;
     document.getElementById("statusText").style.display="block";
     setTimeout(()=>{
         window.location.href="https://t.me/+nW9jAfgTR4I4YTQ9";
     },600);
 }
-
-document.addEventListener("visibilitychange",function(){
+document.addEventListener("visibilitychange",()=>{
     if(document.hidden && joinIntent){
         fbq('trackCustom','TelegramJoinIntent');
         joinIntent=false;
