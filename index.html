@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALOK MISHRA – Cricket Mastermind</title>
+
+<!-- META PIXEL -->
+<script>
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;
+n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)n=f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];
+t=b.createElement(e);t.async=!0;
+t.src=v;
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)
+}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init','YOUR_PIXEL_ID');
+fbq('track','PageView');
+</script>
+<!-- END META PIXEL -->
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* SOFT ANIMATED INDIAN TEAM BACKGROUND */
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(
+        120deg,
+        #0a2a66,
+        #0f4db8,
+        #1c7cff,
+        #0a2a66
+    );
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.container{
+    width:92%;
+    max-width:420px;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    color:#fff;
+    border-radius:22px;
+    padding:22px;
+    box-shadow:0 18px 45px rgba(0,0,0,0.45);
+    text-align:center;
+}
+
+/* LOGO */
+.logo{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    border:3px solid #1c7cff;
+    object-fit:cover;
+    margin-bottom:12px;
+}
+
+/* HEADER */
+h1{
+    font-size:22px;
+    color:#7fb7ff;
+    margin-bottom:4px;
+}
+
+.tagline{
+    font-size:14px;
+    color:#e0e0e0;
+    margin-bottom:12px;
+}
+
+/* COUNTER */
+.counter{
+    font-size:15px;
+    font-weight:bold;
+    color:#ffd36e;
+    margin-bottom:14px;
+}
+
+/* FEATURES */
+.features{
+    text-align:left;
+    margin-bottom:18px;
+}
+
+.features p{
+    font-size:14px;
+    margin-bottom:9px;
+}
+
+.features span{
+    color:#7fb7ff;
+    font-weight:bold;
+}
+
+/* ANIMATED BUTTON */
+.join-btn{
+    position:relative;
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:35px;
+    font-size:16px;
+    font-weight:bold;
+    color:#000;
+    cursor:pointer;
+    overflow:hidden;
+    background: linear-gradient(270deg,#1c7cff,#7fb7ff,#1c7cff);
+    background-size:600% 600%;
+    animation:colorFlow 4s ease infinite, glow 2s ease-in-out infinite;
+}
+
+@keyframes colorFlow{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+@keyframes glow{
+    0%{box-shadow:0 0 10px rgba(127,183,255,0.4)}
+    50%{box-shadow:0 0 20px rgba(127,183,255,0.8)}
+    100%{box-shadow:0 0 10px rgba(127,183,255,0.4)}
+}
+
+/* BALL ANIMATION */
+.join-btn::after{
+    content:"🏏";
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    animation:ballBounce 1s infinite alternate;
+}
+
+@keyframes ballBounce{
+    from{transform:translateY(-50%)}
+    to{transform:translateY(-80%)}
+}
+
+.status{
+    display:none;
+    margin-top:12px;
+    font-size:13px;
+    color:#9affc7;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:16px;
+    font-size:11px;
+    color:#d0d0d0;
+    line-height:1.4;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGO -->
+    <img src="logo.png" class="logo" alt="Alok Mishra Logo">
+
+    <!-- TITLE -->
+    <h1>ALOK MISHRA</h1>
+    <div class="tagline">Cricket Mastermind 🏏</div>
+
+    <!-- COUNTER -->
+    <div class="counter">
+        🔥 Subscribers: <span id="count">0</span>+
+    </div>
+
+    <!-- FEATURES -->
+    <div class="features">
+        <p>📊 <span>Match Analysis</span> – pitch, form & stats</p>
+        <p>🔥 <span>Toss & Match Insights</span></p>
+        <p>⚡ <span>Live Match Updates</span></p>
+        <p>🧠 <span>Cricket Knowledge Sharing</span></p>
+        <p>⚠️ Informational & entertainment purpose only</p>
+    </div>
+
+    <!-- BUTTON -->
+    <button class="join-btn" onclick="joinNow()">
+        🚀 JOIN TELEGRAM CHANNEL
+    </button>
+
+    <div class="status" id="statusText">
+        ✅ Opening Telegram…
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="footer">
+        No guarantee • No fixed • No betting<br>
+        This page is for cricket information & entertainment only
+    </div>
+
+</div>
+
+<script>
+/* COUNTER ANIMATION */
+let target = 30000;   // yahan subscriber number change kar sakte ho
+let count = 0;
+
+let counter = setInterval(()=>{
+    count += 123;
+    if(count >= target){
+        count = target;
+        clearInterval(counter);
+    }
+    document.getElementById("count").innerText = count.toLocaleString();
+}, 30);
+
+/* JOIN + REAL INTENT TRACKING */
+let joinIntent = false;
+
+function joinNow(){
+    joinIntent = true;
+    document.getElementById("statusText").style.display="block";
+    setTimeout(()=>{
+        window.location.href="https://t.me/+nW9jAfgTR4I4YTQ9";
+    },600);
+}
+
+document.addEventListener("visibilitychange",function(){
+    if(document.hidden && joinIntent){
+        fbq('trackCustom','TelegramJoinIntent');
+        joinIntent=false;
+    }
+});
+</script>
+
+</body>
+</html>
